@@ -1,6 +1,5 @@
 package utils;
 
-import java.util.List;
 import java.util.Scanner;
 
 import data.ProductosData;
@@ -219,7 +218,7 @@ public class Menus {
                     (trabajador.getP1().getCantidadProductos() < 2) ?
                             trabajador.getP1().getCantidadProductos() + " Producto"
                             : trabajador.getP1().getCantidadProductos() + " Productos",
-                    trabajador.getP1().getTotal());
+                    trabajador.getP1().precioTotal());
         } else {
             System.out.println("No hay pedido 1 asignado.");
         }
@@ -234,7 +233,7 @@ public class Menus {
                     (trabajador.getP2().getCantidadProductos() < 2) ?
                             trabajador.getP1().getCantidadProductos() + " Producto"
                             : trabajador.getP1().getCantidadProductos() + " Productos",
-                    trabajador.getP2().getTotal());
+                    trabajador.getP2().precioTotal());
         } else {
             System.out.println("No hay pedido 2 asignado.");
         }
@@ -614,7 +613,7 @@ public class Menus {
                         (pedido.getCantidadProductos() < 2) ?
                                 pedido.getCantidadProductos() + " Producto"
                                 : pedido.getCantidadProductos() + " Productos",
-                        pedido.getTotal());
+                        pedido.precioTotal());
             } else {
                 System.out.printf("%d. %s - %s %s (%s) - %s - %.2f - Asignado a: %s\n",
                         numero,
@@ -625,7 +624,7 @@ public class Menus {
                         (pedido.getCantidadProductos() < 2) ?
                                 pedido.getCantidadProductos() + " Producto"
                                 : pedido.getCantidadProductos() + " Productos",
-                        pedido.getTotal(),
+                        pedido.precioTotal(),
                         pedido.getTrabajador().getNombre());
             }
         }

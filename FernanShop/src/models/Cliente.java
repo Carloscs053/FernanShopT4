@@ -191,6 +191,7 @@ public class Cliente {
     }
 
 
+    //Si confirma el pedido, settea el estado en confirmado
     public boolean confirmaPedido() {
         if (pedido1 != null && !pedido1.isRealizado()) {
             pedido1.setRealizado(true);
@@ -263,7 +264,7 @@ public class Cliente {
 
 
     public double obtenerTotal(Pedido pedido) {
-        return pedido.getTotal();
+        return pedido.precioTotal();
     }
 
     //toString

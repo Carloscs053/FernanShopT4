@@ -1,8 +1,7 @@
 package models;
 
-import data.ProductosData;
-
 public class Producto {
+
     // Atributos
     private String codigo;
     private String nombre;
@@ -82,7 +81,7 @@ public class Producto {
     }
 
     // Comprobar si hay stock
-    public boolean hayStock(int cantidad) {
+    public boolean compruebaStock(int cantidad) {
         return cantidad <= stock;
     }
 

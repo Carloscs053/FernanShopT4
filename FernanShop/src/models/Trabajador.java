@@ -11,10 +11,6 @@ public class Trabajador {
     private Pedido p2;
     private int contador = 0;
 
-    //private cont?
-    //private pese...?
-    //No los veo bien en el UML, cosa que deberíamos desarrollar más en profundidad antes de continuar (creo)
-
     //Constructor
     public Trabajador(String nombre, String email, String clave, int telefono) {
         this.nombre = nombre;
@@ -85,6 +81,7 @@ public class Trabajador {
 
     //Otros métodos
 
+    //Es tontería, pero y si comprueba solo si p2 es nulo? si p2 es nulo es seguro que puede aceptar pedidos
     public boolean puedeAceptarPedido() {
         return p1 == null || p2 == null;
     }

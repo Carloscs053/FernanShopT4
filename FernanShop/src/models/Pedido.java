@@ -321,7 +321,7 @@ public class Pedido {
         return false;
     }
 
-    public double getTotal() {
+    public double precioTotal() {
         double total = 0.0;
         if (p1 != null) total += p1.getPrecio();
         if (p2 != null) total += p2.getPrecio();
@@ -532,7 +532,7 @@ public class Pedido {
         return false;
     }
 
-    // Metodo para obtener el siguiente pedido sin asignar
+    // Método para obtener el siguiente pedido sin asignar
     public static Pedido obtenerSiguientePedidoSinAsignar(Tienda tienda) {
         if (tienda.getPedido1() != null && tienda.getPedido1().getTrabajador() == null) {
             return tienda.getPedido1();
@@ -587,7 +587,7 @@ public class Pedido {
                 cliente.getNombre(),
                 cliente.getApellido(),
                 getCantidadProductos(),
-                getTotal(),
+                precioTotal(),
                 comentario,
                 estado,
                 fechaPedido.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
