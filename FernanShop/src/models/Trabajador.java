@@ -86,6 +86,7 @@ public class Trabajador {
         return p1 == null || p2 == null;
     }
 
+    //TODO qué es this?
     public boolean asignarPedido(Pedido pedido) {
         if (p1 == null) {
             p1 = pedido;
