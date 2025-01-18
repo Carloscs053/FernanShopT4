@@ -26,7 +26,7 @@ public class MainFernanShop {
                     ██╔══╝  ██╔══╝  ██╔══██╗██║╚██╗██║██╔══██║██║╚██╗██║╚════██║██╔══██║██║   ██║██╔═══╝
                     ██║     ███████╗██║  ██║██║ ╚████║██║  ██║██║ ╚████║███████║██║  ██║╚██████╔╝██║
                     ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝
-                    
+                                        
                     """);
 
             // Solicitar al usuario que seleccione una opción
@@ -186,7 +186,7 @@ public class MainFernanShop {
                                                     case "1", "2", "3", "4", "5":
                                                         System.out.println("Indique la cantidad deseada: ");
                                                         cantidad = Integer.parseInt(s.nextLine());
-                                                        if (tempCliente.realizaPedido(opProducto, cantidad)) {
+                                                        if (tempCliente.realizaPedido(tempCliente, opProducto, cantidad)) {
                                                             System.out.println("Producto añadido correctamente.");
                                                         } else
                                                             System.out.println("No se ha podido añadir el producto.");

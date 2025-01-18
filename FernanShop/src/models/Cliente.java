@@ -150,7 +150,7 @@ public class Cliente {
     }
 
     //Método para realizar un pedido
-    public boolean realizaPedido(String opProducto, int cantidad) {
+    /*public boolean realizaPedido(String opProducto, int cantidad) {
     
         if (pedido1 == null) {
             pedido1 = new Pedido();
@@ -172,8 +172,40 @@ public class Cliente {
             } else return false;
         }
         return false;
-    }
+    }*/
 
+
+    public boolean realizaPedido(Cliente tempCliente, String opProducto, int cantidad) {
+        if (tempCliente.getPedido1() == null) {
+            tempCliente.setPedido1(new Pedido());
+        } else if (tempCliente.getPedido2() == null){
+            tempCliente.setPedido2(new Pedido());
+        }
+        if (!tempCliente.pedido1.isRealizado()){
+            if (tempCliente.pedido1.getP1() == null) {
+                return tempCliente.pedido1.anadeProducto(opProducto, cantidad);
+            }
+            if (tempCliente.pedido1.getP1() != null && tempCliente.pedido1.getP2() == null) {
+                return tempCliente.pedido1.anadeProducto(opProducto, cantidad);
+            }
+            if (tempCliente.pedido1.getP1() != null && tempCliente.pedido1.getP2() != null &&
+                    tempCliente.pedido1.getP3() == null) {
+                return tempCliente.pedido1.anadeProducto(opProducto, cantidad);
+            }
+        } else if (!tempCliente.pedido2.isRealizado()) {
+            if (tempCliente.pedido2.getP1() == null) {
+                return tempCliente.pedido2.anadeProducto(opProducto, cantidad);
+            }
+            if (tempCliente.pedido2.getP1() != null && tempCliente.pedido2.getP2() == null) {
+                return tempCliente.pedido2.anadeProducto(opProducto, cantidad);
+            }
+            if (tempCliente.pedido2.getP1() != null && tempCliente.pedido2.getP2() != null &&
+                    tempCliente.pedido2.getP3() == null) {
+                return tempCliente.pedido2.anadeProducto(opProducto, cantidad);
+            }
+        }
+        return false;
+    }
 
     //Cuenta los pedidos que tiene el cliente
     public int cuentaPedido() {
@@ -308,7 +340,6 @@ public class Cliente {
         }
         return "-1";
     }
-
 
 
     public String verPedidos(Cliente tempCliente) {

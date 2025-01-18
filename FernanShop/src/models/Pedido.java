@@ -29,7 +29,7 @@ public class Pedido {
         this.p1 = null;
         this.p2 = null;
         this.p3 = null;
-        this.codigo = generarCodigoAleatorio();
+        //this.codigo = generarCodigoAleatorio();
         this.fechaPedido = LocalDate.now();
         this.comentario = "";
         this.estado = "Recibido";
@@ -338,7 +338,7 @@ public class Pedido {
     }
 
     private String generarCodigoAleatorio() {
-    
+
         contadorCodigo++;
         String inicialesCliente = cliente.getNombre().charAt(0) + cliente.getApellido().charAt(0) + "";
         String localidad = cliente.getLocalidad().substring(0, Math.min(3, cliente.getLocalidad().length())).toUpperCase();
@@ -359,27 +359,27 @@ public class Pedido {
         Trabajador trabajador1 = tienda.getTrabajador1();
         Trabajador trabajador2 = tienda.getTrabajador2();
         Trabajador trabajador3 = tienda.getTrabajador3();
-    
+
         if (trabajador1 != null && trabajador1.puedeAceptarPedido() &&
-            trabajador2 != null && trabajador2.puedeAceptarPedido() &&
-            trabajador3 != null && trabajador3.puedeAceptarPedido()) {
-    
+                trabajador2 != null && trabajador2.puedeAceptarPedido() &&
+                trabajador3 != null && trabajador3.puedeAceptarPedido()) {
+
             Trabajador trabajadorMenosPedidos = obtenerTrabajadorConMenosPedidos(trabajador1, trabajador2, trabajador3);
-    
+
             if (trabajadorMenosPedidos != null) {
                 this.setTrabajador(trabajadorMenosPedidos);
                 trabajadorMenosPedidos.asignarPedido(this);
                 return true;
             }
         }
-    
+
         return false;
     }
 
     // Metodo para asignar un trabajador manualmente
     public boolean asignarManualmente(Tienda tienda, int seleccionTrabajador) {
         Trabajador trabajadorSeleccionado = null;
-        
+
         switch (seleccionTrabajador) {
             case 1:
                 trabajadorSeleccionado = tienda.getTrabajador1();
@@ -393,7 +393,7 @@ public class Pedido {
             default:
                 return false;
         }
-    
+
         if (trabajadorSeleccionado != null && trabajadorSeleccionado.puedeAceptarPedido()) {
             this.setTrabajador(trabajadorSeleccionado);
             trabajadorSeleccionado.asignarPedido(this);
@@ -423,16 +423,16 @@ public class Pedido {
                 if (pedidosT1 == pedidosT2 && pedidosT2 == pedidosT3) {
                     asignarPedidoManualmente(tienda);
                     break;
-                } else if ((pedidosT1 == pedidosT2 && pedidosT1 < pedidosT3) || 
-                           (pedidosT1 == pedidosT3 && pedidosT1 < pedidosT2) || 
-                           (pedidosT2 == pedidosT3 && pedidosT2 < pedidosT1)) {
+                } else if ((pedidosT1 == pedidosT2 && pedidosT1 < pedidosT3) ||
+                        (pedidosT1 == pedidosT3 && pedidosT1 < pedidosT2) ||
+                        (pedidosT2 == pedidosT3 && pedidosT2 < pedidosT1)) {
                     asignarPedidoManualmente(tienda);
                     break;
                 } else {
                     Trabajador trabajadorMenosPedidos = obtenerTrabajadorConMenosPedidos(t1, t2, t3);
                     if ((trabajadorMenosPedidos == t1 && pedidosT1 < pedidosT2 && pedidosT1 < pedidosT3) ||
-                        (trabajadorMenosPedidos == t2 && pedidosT2 < pedidosT1 && pedidosT2 < pedidosT3) ||
-                        (trabajadorMenosPedidos == t3 && pedidosT3 < pedidosT1 && pedidosT3 < pedidosT2)) {
+                            (trabajadorMenosPedidos == t2 && pedidosT2 < pedidosT1 && pedidosT2 < pedidosT3) ||
+                            (trabajadorMenosPedidos == t3 && pedidosT3 < pedidosT1 && pedidosT3 < pedidosT2)) {
                         boolean asignado = asignarSiguientePedidoAutomaticamente(tienda);
                         if (!asignado) {
                             break;
@@ -453,8 +453,8 @@ public class Pedido {
         int pedidosT3 = t3.contarPedidos();
 
         if ((pedidosT1 == pedidosT2 && pedidosT1 < pedidosT3) ||
-            (pedidosT1 == pedidosT3 && pedidosT1 < pedidosT2) ||
-            (pedidosT2 == pedidosT3 && pedidosT2 < pedidosT1)) {
+                (pedidosT1 == pedidosT3 && pedidosT1 < pedidosT2) ||
+                (pedidosT2 == pedidosT3 && pedidosT2 < pedidosT1)) {
             return null;
         }
 
