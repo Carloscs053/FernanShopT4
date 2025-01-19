@@ -208,6 +208,7 @@ public class Pedido {
                 case "1" -> {
                     if (ProductosData.Producto1.reducirStock(cantidad)) {
                         p1 = ProductosData.Producto1;
+                        p1.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -215,6 +216,7 @@ public class Pedido {
                 case "2" -> {
                     if (ProductosData.Producto2.reducirStock(cantidad)) {
                         p1 = ProductosData.Producto2;
+                        p1.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -222,6 +224,7 @@ public class Pedido {
                 case "3" -> {
                     if (ProductosData.Producto3.reducirStock(cantidad)) {
                         p1 = ProductosData.Producto3;
+                        p1.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -229,6 +232,7 @@ public class Pedido {
                 case "4" -> {
                     if (ProductosData.Producto4.reducirStock(cantidad)) {
                         p1 = ProductosData.Producto4;
+                        p1.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -236,6 +240,7 @@ public class Pedido {
                 case "5" -> {
                     if (ProductosData.Producto5.reducirStock(cantidad)) {
                         p1 = ProductosData.Producto5;
+                        p1.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -246,6 +251,7 @@ public class Pedido {
                 case "1" -> {
                     if (ProductosData.Producto1.reducirStock(cantidad)) {
                         p2 = ProductosData.Producto1;
+                        p2.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -253,6 +259,7 @@ public class Pedido {
                 case "2" -> {
                     if (ProductosData.Producto2.reducirStock(cantidad)) {
                         p2 = ProductosData.Producto2;
+                        p2.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -260,6 +267,7 @@ public class Pedido {
                 case "3" -> {
                     if (ProductosData.Producto3.reducirStock(cantidad)) {
                         p2 = ProductosData.Producto3;
+                        p2.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -267,6 +275,7 @@ public class Pedido {
                 case "4" -> {
                     if (ProductosData.Producto4.reducirStock(cantidad)) {
                         p2 = ProductosData.Producto4;
+                        p2.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -274,6 +283,7 @@ public class Pedido {
                 case "5" -> {
                     if (ProductosData.Producto5.reducirStock(cantidad)) {
                         p2 = ProductosData.Producto5;
+                        p2.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -284,6 +294,7 @@ public class Pedido {
                 case "1" -> {
                     if (ProductosData.Producto1.reducirStock(cantidad)) {
                         p3 = ProductosData.Producto1;
+                        p3.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -291,6 +302,7 @@ public class Pedido {
                 case "2" -> {
                     if (ProductosData.Producto2.reducirStock(cantidad)) {
                         p3 = ProductosData.Producto2;
+                        p3.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -298,6 +310,7 @@ public class Pedido {
                 case "3" -> {
                     if (ProductosData.Producto3.reducirStock(cantidad)) {
                         p3 = ProductosData.Producto3;
+                        p3.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -305,6 +318,7 @@ public class Pedido {
                 case "4" -> {
                     if (ProductosData.Producto4.reducirStock(cantidad)) {
                         p3 = ProductosData.Producto4;
+                        p3.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -312,6 +326,7 @@ public class Pedido {
                 case "5" -> {
                     if (ProductosData.Producto5.reducirStock(cantidad)) {
                         p3 = ProductosData.Producto5;
+                        p3.setCantidadPedido(cantidad);
                         return true;
                     }
                     return false;
@@ -323,9 +338,9 @@ public class Pedido {
 
     public double precioTotal() {
         double total = 0.0;
-        if (p1 != null) total += p1.getPrecio();
-        if (p2 != null) total += p2.getPrecio();
-        if (p3 != null) total += p3.getPrecio();
+        if (p1 != null) total += p1.calculaTotalProducto();
+        if (p2 != null) total += p2.calculaTotalProducto();
+        if (p3 != null) total += p3.calculaTotalProducto();
         return total;
     }
 
@@ -599,10 +614,17 @@ public class Pedido {
         salida += "- Lista de productos: \n";
         salida += (p1 != null) ? "\t- " + p1.pintaProducto() : "";
         salida += (p1 != null) ? "  \t" + p1.getCantidadPedido() + " unidades\n" : "\n";
+        salida += (p1 != null) ? "  \tTotal: " + p1.calculaTotalProducto() + " Euros\n" : "\n";
         salida += (p2 != null) ? "\t- " + p2.pintaProducto() : "";
         salida += (p2 != null) ? "  \t" + p2.getCantidadPedido() + " unidades\n" : "\n";
+        salida += (p2 != null) ? "  \tTotal: " + p2.calculaTotalProducto() + " Euros\n" : "\n";
         salida += (p3 != null) ? "\t- " + p3.pintaProducto() : "";
         salida += (p3 != null) ? "  \t" + p3.getCantidadPedido() + " unidades\n" : "\n";
+        salida += (p3 != null) ? "  \tTotal: " + p3.calculaTotalProducto() + " Euros\n" : "\n";
+        salida += "\n";
+        salida += "PRECIO TOTAL: " + precioTotal();
         return salida;
     }
+
+
 }

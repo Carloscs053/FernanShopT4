@@ -118,4 +118,8 @@ public class Producto {
                 ",codigo" + codigo +
                 '}';
     }
+
+    public double calculaTotalProducto() {
+        return cantidadPedido * precio;
+    }
 }
