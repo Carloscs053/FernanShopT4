@@ -68,12 +68,6 @@ public class Menus {
         if (tienda.getPedido2() != null && tienda.getPedido2().getCodigo().equalsIgnoreCase(codigoPedido)) {
             return tienda.getPedido2();
         }
-        if (tienda.getPedido3() != null && tienda.getPedido3().getCodigo().equalsIgnoreCase(codigoPedido)) {
-            return tienda.getPedido3();
-        }
-        if (tienda.getPedido4() != null && tienda.getPedido4().getCodigo().equalsIgnoreCase(codigoPedido)) {
-            return tienda.getPedido4();
-        }
         return null; // Si no se encuentra el pedido
     }
 
@@ -420,12 +414,6 @@ public class Menus {
             case 2:
                 pedidoSeleccionado = tienda.getPedido2();
                 break;
-            case 3:
-                pedidoSeleccionado = tienda.getPedido3();
-                break;
-            case 4:
-                pedidoSeleccionado = tienda.getPedido4();
-                break;
             default:
                 System.out.println("Selección no válida.");
                 return;
@@ -597,8 +585,6 @@ public class Menus {
         Pedido pedido = switch (numero) {
             case 1 -> tienda.getPedido1();
             case 2 -> tienda.getPedido2();
-            case 3 -> tienda.getPedido3();
-            case 4 -> tienda.getPedido4();
             default -> null;
         };
 

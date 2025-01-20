@@ -9,8 +9,8 @@ import models.*;
 import java.util.Scanner;
 
 public class MainFernanShop {
+    final public static Scanner S = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
         String op;
         boolean logueado = false;
         ProductosData productosData = new ProductosData();
@@ -34,7 +34,7 @@ public class MainFernanShop {
                     1. Iniciar Sesión.
                     2. Registrarse
                     Seleccione una opción:\s""");
-            op = s.nextLine();
+            op = S.nextLine();
 
             switch (op) {
                 case "1":
@@ -42,9 +42,9 @@ public class MainFernanShop {
                     logueado = false;
                     // Solicitar nombre y contraseña para iniciar sesión
                     System.out.print("Email: ");
-                    String email = s.nextLine();
+                    String email = S.nextLine();
                     System.out.print("Contraseña: ");
-                    String clave = s.nextLine();
+                    String clave = S.nextLine();
 
                     //Comprueba si es el admin
                     if (tienda.getAdmin().loginAdmin(email, clave)) {
@@ -54,7 +54,7 @@ public class MainFernanShop {
                         //Esto va dentro de un do-while y con un switch
                         do {
                             Menus.menuAdmin(tienda);
-                            opAdmin = s.nextLine();
+                            opAdmin = S.nextLine();
                             switch (opAdmin) {
                                 case "1":
                                     Menus.menuAsignaPedido(tienda);
@@ -102,7 +102,7 @@ public class MainFernanShop {
                             Utils.cargandoPantalla();
                             do {
                                 Menus.menuTrabajador(tempTrabajador, productosData, tienda);
-                                opTrabajador = s.nextLine();
+                                opTrabajador = S.nextLine();
                                 switch (opTrabajador) {
                                     case "1":
                                         // Consultar los pedidos asignados al trabajador
@@ -165,7 +165,7 @@ public class MainFernanShop {
                                 String opCliente, opProducto, opModifica;
                                 do {
                                     Menus.menuCliente(tempCliente);
-                                    opCliente = s.nextLine();
+                                    opCliente = S.nextLine();
 
                                     switch (opCliente) {
                                         case "1":
@@ -175,17 +175,19 @@ public class MainFernanShop {
                                             break;
                                         case "2":
                                             //Aquí puede realizar el pedido
-                                            //TODO arreglar bugs: problemas con la agregación al pedido y con el tercer producto
                                             int cantidad = 0;
                                             do {
                                                 System.out.println(tienda.pintaCatalogo());
                                                 System.out.println("6. Terminar pedido");
                                                 System.out.println("7. Cancelar pedido");
-                                                opProducto = s.nextLine();
+                                                System.out.println();
+                                                System.out.print("Indique el producto que desee (6 para confirmar el pedido y " +
+                                                        "7 para cancelarlo: ");
+                                                opProducto = S.nextLine();
                                                 switch (opProducto) {
                                                     case "1", "2", "3", "4", "5":
-                                                        System.out.println("Indique la cantidad deseada: ");
-                                                        cantidad = Integer.parseInt(s.nextLine());
+                                                        System.out.print("Indique la cantidad deseada: ");
+                                                        cantidad = Integer.parseInt(S.nextLine());
                                                         if (tempCliente.realizaPedido(tempCliente, opProducto, cantidad)) {
                                                             System.out.println("Producto añadido correctamente.");
                                                         } else
@@ -243,24 +245,24 @@ public class MainFernanShop {
                                                 System.out.println(tempCliente.verCliente());
                                                 System.out.println();
                                                 Menus.modificaCliente();
-                                                opModifica = s.nextLine();
+                                                opModifica = S.nextLine();
                                                 //TODO quizás sea más conveniente un método para cada campo
                                                 switch (opModifica) {
                                                     case "1":
                                                         System.out.print("Introduzca el nuevo nombre: ");
-                                                        String nombre = s.nextLine();
+                                                        String nombre = S.nextLine();
                                                         tempCliente.modificaNombre(nombre);
                                                         System.out.println("Nombre modificado correctamente.");
                                                         break;
                                                     case "2":
                                                         System.out.print("Introduzca el nuevo apellido: ");
-                                                        String apellido = s.nextLine();
+                                                        String apellido = S.nextLine();
                                                         tempCliente.modificaApellido(apellido);
                                                         System.out.println("Apellido modificado correctamente.");
                                                         break;
                                                     case "3":
                                                         System.out.println("Introduzca el nuevo email: ");
-                                                        email = s.nextLine();
+                                                        email = S.nextLine();
                                                         //TODO falta validación
                                                         if (tempCliente.modificaEmail(email)) {
                                                             System.out.println("Email modificado correctamente.");
@@ -268,7 +270,7 @@ public class MainFernanShop {
                                                         break;
                                                     case "4":
                                                         System.out.println("Introduzca el nuevo número de teléfono: ");
-                                                        String telefono = s.nextLine();
+                                                        String telefono = S.nextLine();
                                                         if (tempCliente.modificaTelefono(telefono)) {
                                                             System.out.println("Teléfono modificado correctamente.");
                                                         } else System.out.println("Teléfono no permitido.");
@@ -302,15 +304,42 @@ public class MainFernanShop {
                             } else {
                                 //Si no es nada de lo anterior, las credenciales no son correctas
                                 System.out.println("Email y/o contraseña incorrectas");
+                                Utils.pulseParaContinuar();
+                                Utils.limpiaPantalla();
                             }
                         }
                     }
                     break;
 
                 case "2":
-                    // Solicitar al usuario que se registre llamando a un metodo
-                    //TODO pulir. Indicar el índice correcto
-                    Menus.menuRegistro(tienda);
+                    // Solicitar al usuario que se registre llamando a un método2
+                    //TODO terminar de arreglar el registro
+                    String nombre, apellido, direccion, localidad, provincia, telefono;
+
+                    if (tienda.registrosLlenos()) System.out.println("No se puede dar de alta a más clientes.");
+                    else {
+                        System.out.print("Introduzca su nombre: ");
+                        nombre = S.nextLine();
+                        System.out.print("Introduzca su apellido: ");
+                        apellido = S.nextLine();
+                        System.out.print("Introduzca su dirección: ");
+                        direccion = S.nextLine();
+                        System.out.print("Introduzca su localidad: ");
+                        localidad = S.nextLine();
+                        System.out.print("Introduzca su provincia: ");
+                        provincia = S.nextLine();
+                        System.out.print("Introduzca su email: ");
+                        email = S.nextLine();
+                        System.out.print("Introduzca su teléfono: ");
+                        telefono = S.nextLine();
+                        System.out.print("Introduzca su clave: ");
+                        clave = S.nextLine();
+
+                        if (tienda.registraCliente(nombre, apellido, direccion, localidad, provincia, email, telefono,
+                                clave)) {
+                            System.out.println("Cliente dado de alta correctamente");
+                        } else System.out.println("Ha ocurrido un error. Inténtelo de nuevo");
+                    }
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
 

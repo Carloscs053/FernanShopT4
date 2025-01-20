@@ -555,12 +555,6 @@ public class Pedido {
         if (tienda.getPedido2() != null && tienda.getPedido2().getTrabajador() == null) {
             return tienda.getPedido2();
         }
-        if (tienda.getPedido3() != null && tienda.getPedido3().getTrabajador() == null) {
-            return tienda.getPedido3();
-        }
-        if (tienda.getPedido4() != null && tienda.getPedido4().getTrabajador() == null) {
-            return tienda.getPedido4();
-        }
         return null;
     }
 

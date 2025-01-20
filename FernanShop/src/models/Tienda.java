@@ -14,8 +14,6 @@ public class Tienda {
     private Trabajador trabajador3;
     private Pedido pedido1;
     private Pedido pedido2;
-    private Pedido pedido3;
-    private Pedido pedido4;
     private Producto producto1;
     private Producto producto2;
     private Producto producto3;
@@ -31,8 +29,6 @@ public class Tienda {
         this.trabajador3 = null;
         this.pedido1 = null;
         this.pedido2 = null;
-        this.pedido3 = null;
-        this.pedido4 = null;
         this.admin = null;
         this.producto1 = null;
         this.producto2 = null;
@@ -98,22 +94,6 @@ public class Tienda {
         this.pedido2 = pedido2;
     }
 
-    public Pedido getPedido3() {
-        return pedido3;
-    }
-
-    public void setPedido3(Pedido pedido3) {
-        this.pedido3 = pedido3;
-    }
-
-    public Pedido getPedido4() {
-        return pedido4;
-    }
-
-    public void setPedido4(Pedido pedido4) {
-        this.pedido4 = pedido4;
-    }
-
     public Admin getAdmin() {
         return admin;
     }
@@ -123,7 +103,7 @@ public class Tienda {
     public void mock() {
         this.admin = new Admin("admin", "admin", "1234");
         this.cliente1 = ClientesData.cliente1;
-        this.cliente2 = ClientesData.cliente2;
+        this.cliente2 = null;
         this.trabajador1 = TrabajadoresData.trabajador1;
         this.trabajador2 = TrabajadoresData.trabajador2;
         this.trabajador3 = TrabajadoresData.trabajador3;
@@ -137,8 +117,8 @@ public class Tienda {
         this.producto5 = ProductosData.Producto5;
 
         // Inicializar pedidos
-        this.pedido3 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);
-        this.pedido4 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);
+        /*this.pedido3 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);
+        this.pedido4 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);*/
     }
     
 
@@ -162,7 +142,7 @@ public class Tienda {
 
     public Cliente loginCliente(String email, String clave) {
         if (cliente1 != null && cliente1.loginCliente(email, clave)) return cliente1;
-        if (cliente2 != null && cliente2.loginCliente(email, clave)) return cliente2;
+        if (cliente2 != null && cliente2.getEmail().equals(email) && cliente2.getClave().equals(clave)) return cliente2;
         return null;
     }
 
@@ -226,37 +206,29 @@ public class Tienda {
 
     public boolean registraCliente(String nombre, String apellido, String direccion, String localidad, String provincia,
                                    String email, String telefono, String clave) {
-        if (registrosLlenos()) return false;
-        else {
             if (cliente1 == null) {
+                cliente1 = new Cliente(nombre, apellido, direccion, localidad, provincia, email, telefono, clave);
                 if (!cliente1.validaEmail(email)) {
-                    System.out.println("Email no permitido.");
+                    cliente1 = null;
                     return false;
                 } else if (cliente1.validaTelefono(telefono)) {
-                    System.out.println("Teléfono no permitido");
+                    cliente1 = null;
                     return false;
                 } else {
-                    if (cliente1.validaEmail(email) && cliente1.validaTelefono(telefono)) {
-                        cliente1 = new Cliente(nombre, apellido, direccion, localidad, provincia, email, telefono, clave);
-                        return true;
-                    }
+                    return cliente1.validaEmail(email) && cliente1.validaTelefono(telefono);
                 }
-            }
-            if (cliente1 != null && cliente2 == null) {
+            } else if (cliente1 != null && cliente2 == null) {
                 cliente2 = new Cliente(nombre, apellido, direccion, localidad, provincia, email, telefono, clave);
                 if (!cliente2.validaEmail(email)) {
-                    System.out.println("Email no permitido.");
                     cliente2 = null;
                     return false;
                 } else if (!cliente2.validaTelefono(telefono)) {
-                    System.out.println("Teléfono no permitido");
                     cliente2 = null;
                     return false;
                 } else {
                     return cliente2.validaEmail(email) && cliente2.validaTelefono(telefono);
                 }
             }
-        }
         return false;
     }
 
@@ -265,8 +237,6 @@ public class Tienda {
         int count = 0;
         if (pedido1 != null && pedido1.getTrabajador() == null) count++;
         if (pedido2 != null && pedido2.getTrabajador() == null) count++;
-        if (pedido3 != null && pedido3.getTrabajador() == null) count++;
-        if (pedido4 != null && pedido4.getTrabajador() == null) count++;
         return count;
     }
 
@@ -274,8 +244,6 @@ public class Tienda {
         String pedidos = "";
         pedidos += ((pedido1 != null) ? getPedido1().toString() + "\n" : "\n");
         pedidos += ((pedido2 != null) ? getPedido2().toString() + "\n" : "\n");
-        pedidos += ((pedido3 != null) ? getPedido3().toString() + "\n" : "\n");
-        pedidos += ((pedido4 != null) ? getPedido4().toString() + "\n" : "\n");
         return pedidos;
     }
 
@@ -306,8 +274,6 @@ public class Tienda {
                 ", trabajador3=" + trabajador3 +
                 ", pedido1=" + pedido1 +
                 ", pedido2=" + pedido2 +
-                ", pedido3=" + pedido3 +
-                ", pedido4=" + pedido4 +
                 '}';
     }
 }
