@@ -353,7 +353,6 @@ public class Pedido {
     }
 
     private String generarCodigoAleatorio() {
-
         contadorCodigo++;
         String inicialesCliente = cliente.getNombre().charAt(0) + cliente.getApellido().charAt(0) + "";
         String localidad = cliente.getLocalidad().substring(0, Math.min(3, cliente.getLocalidad().length())).toUpperCase();
@@ -362,7 +361,7 @@ public class Pedido {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder codigoAlfanumerico = new StringBuilder();
         for (int i = 0; i < 7; i++) {
-            int indice = (contadorCodigo * (i + 1) + i) % caracteres.length();
+            int indice = (int) (Math.random() * caracteres.length());
             codigoAlfanumerico.append(caracteres.charAt(indice));
         }
         return inicialesCliente + localidad + numerosTelefono + codigoAlfanumerico;
